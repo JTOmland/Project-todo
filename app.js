@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-console.log("before apiController")
+console.log("before apiController in todo")
 apiController(app);
 
 // catch 404 and forward to error handler
