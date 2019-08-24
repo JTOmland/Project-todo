@@ -12,7 +12,7 @@ var apiController = require('./controllers/apiController');
 
 
 var app = express();
-mongoose.connect('mongodb://jeffomland:einstein@ds023560.mlab.com:23560/iceman');
+mongoose.connect('mongodb://jeffomland:einstein@ds023560.mlab.com:23560/iceman', { useNewUrlParser: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
