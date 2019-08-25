@@ -14,9 +14,33 @@ function DataFactory(idFactory) {
         fullModel: fullModel,
         processSteps: processSteps,
         addPeriods: addPeriods,
-        buildOperationsWorkcenters: buildOperationsWorkcenters
+        buildOperationsWorkcenters: buildOperationsWorkcenters,
+        actionTemplate: actionTemplate
     };
     var processSteps = [];
+    var actionTemplate = {
+        type: 'Action',
+        process: 'parrallel',
+        title: '',
+        inputs: [],
+        status: 'active',
+        due: Date.now(),
+        defer: Date.now(),
+        context: 'No Context',
+        project: 'No Project',
+        note: '',
+        completed: false,
+        tasktime: 5, //tasktime in minutes?
+        recures: false,
+        status: 'Active',  //Active, Not Available
+        desire: 'Empty',
+        value: 5,
+        priority: 1,
+        urgent: false,
+        important: true,
+        flagged: true,
+        delayedCount: 0
+    };  
     var dataModel = {
         "ModelName": "Test1",
         "CPModelItems": [

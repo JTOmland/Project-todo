@@ -1,7 +1,7 @@
 md-dialog
     md-toolbar
         .md-toolbar-tools
-            h2 New Action 
+            h2(flex) Action
             span(flex)
             md-button.md-icon-button(ng-click='closeEdit()')
                 md-icon close
@@ -9,6 +9,8 @@ md-dialog
         md-content()
             form(name='productEditForm')
                 md-content.md-padding(layout='column')
+                    h6(ng-if="action.status = 'Active'", flex) 
+                        {{action.status}}, Times delayed: {{action.delayedCount}}
                     md-input-container.md-block()
                         label Action
                         input(ng-model='action.title' required="", name="productname")
@@ -30,6 +32,30 @@ md-dialog
                     md-input-container.no-margin
                         label Due
                         md-datepicker(ng-model="due" name="dateField" md-hide-icons="calendar")
+                    md-input-container.md-block()
+                        label Note
+                        input(ng-model='action.note')
+                    md-input-container.md-block()
+                        label Tasktime in minutes
+                        input(ng-model='action.tasktime')
+                    md-input-container.md-block()
+                        label Desired Outcome
+                        input(ng-model='action.desire')
+                    md-input-container.md-block()
+                        label Value to complete
+                        input(ng-model='action.value')
+                    md-input-container.md-block()
+                        label Priority
+                        input(ng-model='action.priority')
+                    md-input-container.md-block()
+                        label Urgent
+                        input(ng-model='action.urgent')
+                    md-input-container.md-block()
+                        label Flag
+                        input(ng-model='action.flagged')
+                    md-input-container.md-block()
+                        label Recures
+                        input(ng-model='action.recures')
                     div(layout='row' layout-align="end center" flex="100")
-                        md-button.md-raised.md-primary(ng-click="createProduct()" type='submit' ng-disabled="productEditForm.$invalid" ng-if="mode=='create'") Create
-                        md-button.md-raised.md-primary(ng-click="editProduct()" type='submit' ng-disabled="productEditForm.$invalid" ng-if="mode!='create'") Update     
+                        md-button.md-raised.md-primary(ng-click="createAction()" type='submit' ng-disabled="productEditForm.$invalid" ng-if="mode=='create'") Create
+                        md-button.md-raised.md-primary(ng-click="editAction()" type='submit' ng-disabled="productEditForm.$invalid" ng-if="mode!='create'") Update 

@@ -41,7 +41,10 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
     }
     $scope.originalItem = {};
     if (dialogLocals.action) {
+        $scope.originalItem = dialogLocals.action;
         $scope.action = dialogLocals.action;
+        console.log("dialoglocals", dialogLocals, "action",$scope.action)
+
     }
     if (dialogLocals.projects) {
         $scope.projects = dialogLocals.projects;
@@ -54,44 +57,14 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
     }
     
     $scope.closeEdit = function () {
-
         $mdDialog.hide($scope.originalItem);
     }
 
-    // $scope.closeOperationEdit = function () {
-    //     console.log("close operation edit original item", $scope.originalItem);
-    //     $mdDialog.hide($scope.originalItem);
-    // }
-
-    // $scope.closeModelEdit = function () {
-
-    // }
-
-    // $scope.createModel = function () {
-    //     console.log("createModel", $scope.model);
-    //     OperationService.addModel($scope.model).then(function (data) {
-    //         BrokerService.modelAdded(data);
-    //         $mdDialog.hide(data)
-    //     });
-
-    // }
-
-    // $scope.createOperation = function () {
-    //     console.log('creatOperation button', $scope.operation);
-    //     OperationService.updateOperation($scope.operation).then(function (data) {
-    //         console.log("demand edit createOperaiton call to OperationsService returned with data", data);
-    //         console.log('Calling BrokerService and sending $scope.operation')
-    //         BrokerService.operationAdded($scope.operation);
-    //         $mdDialog.hide(data);
-    //     });
-
-    // }
-
-    $scope.createProduct = function () {
-        $mdDialog.hide($scope.product);
+    $scope.createAction = function () {
+        $mdDialog.hide($scope.action);
     }
 
-    $scope.editProduct = function () {
+    $scope.editAction = function () {
         // console.log("before dialogLocal.product", dialogLocals.product, $scope.product)
         // dialogLocals.product = angular.copy($scope.product)
         // console.log("after dialogLocal.product", dialogLocals.product, $scope.product)
@@ -99,24 +72,9 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
         $mdDialog.hide($scope.action);
     }
 
-    // $scope.createWorkcenter = function () {
-    //     //need to create a workcenter and then update the operation
-    //     console.log('creatworkcenter button created workcenter and pushed into operation for update', $scope.operation);
-    //     $scope.operation.WorkCenters.push($scope.workcenter)
-    //     OperationService.updateWorkCenter($scope.workcenter).then(function (data) {
-    //         BrokerService.workcenterAdded($scope.workcenter);
-    //         $mdDialog.hide(data);
-    //     });
-    // }
-
-    // $scope.editWorkcenter = function () {
-    //     $mdDialog.hid($scope.workcenter);
-    // }
 
     if (!dialogLocals.mode == 'createModel') {
         //this builds the information used for the scroller years and months
-
-
     }
 
 
