@@ -1,27 +1,13 @@
 vsapp.controller('InBoxController', InBoxController)
 
-InBoxController.$inject = ['$scope', '$mdDialog', '$mdToast', '$q', '$timeout', '$log'];
+InBoxController.$inject = ['$scope', '$mdDialog', '$mdToast', '$q', '$timeout', '$log', 'OperationService'];
 
 
-function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log) {
+function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log, OperationService) {
 
     //not sure if I will use these or not.  the simulate query can be removed but for now I think auto-complete needs a promise returned
     $scope.simulateQuery = false;
     $scope.isDisabled = false;
-
-    // $scope.activeItem = {
-    //     'type': 'action',
-    //     'process': 'default',
-    //     'title': '',
-    //     'inputs': [],
-    //     'status': 'active',
-    //     'due': '',
-    //     'defer': '',
-    //     'context': '',
-    //     'project': '',
-
-    // }
-
 
     //temp data to debug
     $scope.actions = [
@@ -341,23 +327,29 @@ function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log) {
 
 
     $scope.addAction = function () {
-        console.log('add action')
-        
-
+        console.log('add action');
         var action = {
             type: 'action',
             process: 'parrallel',
             title: '',
             inputs: [],
             status: 'active',
-            due: '',
-            defer: '',
+            due: Date.now(),
+            defer: Date.now(),
             context: 'No Context',
             project: 'No Project',
             note: '',
             completed: false,
-            tasktime: '',
-            recures: ''
+            tasktime: 5, //tasktime in minutes?
+            recures: false,
+            status: 'Active',  //Active, Not Available
+            desire: 'Empty',
+            value: 5,
+            priority: 1,
+            urgent: false,
+            important: true,
+            flagged: true,
+            delayedCount: 0
         }
         var items = {
             action: action,
@@ -397,6 +389,45 @@ function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log) {
         });
 
         console.log("initial projects and contexts", $scope.projects, $scope.contexts)
+        OperationService.getAOR().then(function (response) {
+            console.log("response from load outputs", response);
+            $scope.routes = [];
+            _.each(response.data, function (output) {
+                if (output.BaseUsage) {
+                    $scope.routes.push(output._id);
+                } else {
+                    $scope.routes.push(output);
+                }
+            });
+            console.log("$scope.routes after getAOR", $scope.routes);
+            $scope.test = {
+                type: 'AOR',
+                process: 'parrallel',
+                title: 'Test new schema',
+                inputs: [],
+                status: 'active',
+                due: Date.now(),
+                defer: Date.now(),
+                context: 'No Context',
+                project: 'No Project',
+                note: '',
+                completed: false,
+                tasktime: 5, //tasktime in minutes?
+                recures: false,
+                status: 'Active',  //Active, Not Available
+                desire: 'Empty',
+                value: 5,
+                priority: 1,
+                urgent: false,
+                important: true,
+                flagged: true,
+                delayedCount: 0
+            }
+            // OperationService.updateComponent($scope.test).then(function (response) {
+            //     console.log("test save of new component schema", response.data);
+            // });
+
+        });
 
     }
     init();

@@ -39,12 +39,7 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
             return 'Project';
         }
     }
-
-
-
     $scope.originalItem = {};
-
-
     if (dialogLocals.action) {
         $scope.action = dialogLocals.action;
     }
@@ -63,42 +58,34 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
         $mdDialog.hide($scope.originalItem);
     }
 
-    $scope.closeOperationEdit = function () {
-        console.log("close operation edit original item", $scope.originalItem);
-        $mdDialog.hide($scope.originalItem);
-    }
+    // $scope.closeOperationEdit = function () {
+    //     console.log("close operation edit original item", $scope.originalItem);
+    //     $mdDialog.hide($scope.originalItem);
+    // }
 
-    $scope.closeModelEdit = function () {
+    // $scope.closeModelEdit = function () {
 
-    }
+    // }
 
-    $scope.createModel = function () {
-        console.log("createModel", $scope.model);
-        OperationService.addModel($scope.model).then(function (data) {
-            BrokerService.modelAdded(data);
-            $mdDialog.hide(data)
-        });
+    // $scope.createModel = function () {
+    //     console.log("createModel", $scope.model);
+    //     OperationService.addModel($scope.model).then(function (data) {
+    //         BrokerService.modelAdded(data);
+    //         $mdDialog.hide(data)
+    //     });
 
-    }
+    // }
 
-    $scope.editModel = function () {
+    // $scope.createOperation = function () {
+    //     console.log('creatOperation button', $scope.operation);
+    //     OperationService.updateOperation($scope.operation).then(function (data) {
+    //         console.log("demand edit createOperaiton call to OperationsService returned with data", data);
+    //         console.log('Calling BrokerService and sending $scope.operation')
+    //         BrokerService.operationAdded($scope.operation);
+    //         $mdDialog.hide(data);
+    //     });
 
-    }
-
-    $scope.createOperation = function () {
-        console.log('creatOperation button', $scope.operation);
-        OperationService.updateOperation($scope.operation).then(function (data) {
-            console.log("demand edit createOperaiton call to OperationsService returned with data", data);
-            console.log('Calling BrokerService and sending $scope.operation')
-            BrokerService.operationAdded($scope.operation);
-            $mdDialog.hide(data);
-        });
-
-    }
-
-    $scope.editOperation = function () {
-
-    }
+    // }
 
     $scope.createProduct = function () {
         $mdDialog.hide($scope.product);
@@ -112,19 +99,19 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
         $mdDialog.hide($scope.action);
     }
 
-    $scope.createWorkcenter = function () {
-        //need to create a workcenter and then update the operation
-        console.log('creatworkcenter button created workcenter and pushed into operation for update', $scope.operation);
-        $scope.operation.WorkCenters.push($scope.workcenter)
-        OperationService.updateWorkCenter($scope.workcenter).then(function (data) {
-            BrokerService.workcenterAdded($scope.workcenter);
-            $mdDialog.hide(data);
-        });
-    }
+    // $scope.createWorkcenter = function () {
+    //     //need to create a workcenter and then update the operation
+    //     console.log('creatworkcenter button created workcenter and pushed into operation for update', $scope.operation);
+    //     $scope.operation.WorkCenters.push($scope.workcenter)
+    //     OperationService.updateWorkCenter($scope.workcenter).then(function (data) {
+    //         BrokerService.workcenterAdded($scope.workcenter);
+    //         $mdDialog.hide(data);
+    //     });
+    // }
 
-    $scope.editWorkcenter = function () {
-        $mdDialog.hid($scope.workcenter);
-    }
+    // $scope.editWorkcenter = function () {
+    //     $mdDialog.hid($scope.workcenter);
+    // }
 
     if (!dialogLocals.mode == 'createModel') {
         //this builds the information used for the scroller years and months

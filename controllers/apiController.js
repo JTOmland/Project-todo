@@ -3,7 +3,6 @@ var operation = require('../models/operationsModel');
 var model = require('../models/modelModel');
 var output = require('../models/psModel')
 var Period = require('../models/periodModel');
-var _ = require('lodash');
 var workcenter = require('../models/workcenterModel');
 var errorHandler = require('./errorHandler.js');
 var fs = require('fs');
@@ -11,7 +10,7 @@ var _ = require('lodash');
 var workcenterTest = require('../models/WorkCenter');
 var productTest = require('../models/Product');
 var entities = require('../models/entityModel');
-var components = require('../models/componentModel');
+var ToDo = require('../models/todoModel');
 var uploader = require('./uploader');
 multer = require('multer');
 var upload = multer({
@@ -25,7 +24,7 @@ module.exports = function (app) {
 
     app.delete('/api/deleteComponent', function(req, res) {
         console.log("/api/deleteComponent", req.body);
-        components.findByIdAndRemove(req.body._id, function(err, component){
+        ToDo.findByIdAndRemove(req.body._id, function(err, component){
             if(err){
                 return res.status(500).send(err);
             } else {
@@ -187,7 +186,7 @@ module.exports = function (app) {
         console.log("post api/component body", req.body);
         if (req.body._id) {
             console.log("updateing component id was found")
-            components.findOneAndUpdate({ _id: req.body._id }, { $set: { name: req.body.name, inputs: req.body.inputs, usages: req.body.usages, type: req.body.type, description: req.body.description} },
+            ToDo.findOneAndUpdate({ _id: req.body._id }, { $set: { name: req.body.name, inputs: req.body.inputs, type: req.body.type, description: req.body.description} },
                 function (err, data) {
                     if (err) {
                         errorHandler(err, req, res);
@@ -197,7 +196,7 @@ module.exports = function (app) {
                 });
 
         } else {
-            var newComponent = new components(req.body);
+            var newComponent = new ToDo(req.body);
             newComponent.save(function (err, response) {
                 if (err) {
                     errorHandler(err, req, response);
@@ -224,7 +223,7 @@ module.exports = function (app) {
     app.get('/api/AOR', function(req, res){
         //AOR = areas of responsibility.  It's the top level grouping of projects.
         console.log('api/AOR');
-        components.find({type: "AOR"}).exec(function(err, AOR){
+        ToDo.find({type: "AOR"}).exec(function(err, AOR){
             if(err) {
                 errorHandler(err, req, res);
             } else {
@@ -299,7 +298,7 @@ module.exports = function (app) {
     //Below is testing a simplified schema for game manufacturing
 
     app.get('/api/item/all', function(req,res){
-        components.find({}).lean().exec(function(err, results){
+        ToDo.find({}).lean().exec(function(err, results){
             if(err) {
                 errorHandler(err, req, res);
             } else {
