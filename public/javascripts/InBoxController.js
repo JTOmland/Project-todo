@@ -1,9 +1,9 @@
 vsapp.controller('InBoxController', InBoxController)
 
-InBoxController.$inject = ['$scope', '$mdDialog', '$mdToast', '$q', '$timeout', '$log'];
+InBoxController.$inject = ['$scope', '$mdDialog', '$mdToast', '$q', '$timeout', '$log', 'DataFactory'];
 
 
-function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log) {
+function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log, DataFactory) {
 
     //not sure if I will use these or not.  the simulate query can be removed but for now I think auto-complete needs a promise returned
     $scope.simulateQuery = false;
@@ -344,21 +344,8 @@ function InBoxController($scope, $mdDialog, $mdToast, $q, $timeout, $log) {
         console.log('add action')
         
 
-        var action = {
-            type: 'action',
-            process: 'parrallel',
-            title: '',
-            inputs: [],
-            status: 'active',
-            due: '',
-            defer: '',
-            context: 'No Context',
-            project: 'No Project',
-            note: '',
-            completed: false,
-            tasktime: '',
-            recures: ''
-        }
+        var action = DataFactory.actionTemplate();
+        console.log("action from DataFactory", action);
         var items = {
             action: action,
             projects: $scope.projects,

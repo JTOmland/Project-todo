@@ -3567,6 +3567,10 @@ function DataFactory(idFactory) {
         "AvailableCapacityBasedModelItems": []
     }
 
+    function actionTemplate() {
+        return actionTemplate;
+    }
+
     function addPeriods() {
         //TODO JTO:  for now just build a new available hours but in future need to remove this for truly new.
         buildAvailableHoursModel();

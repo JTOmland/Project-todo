@@ -45,6 +45,8 @@ function NewActionController($scope, $mdDialog, dialogLocals, OperationService, 
         $scope.action = dialogLocals.action;
         console.log("dialoglocals", dialogLocals, "action",$scope.action)
 
+    } else {
+        console.log("dialoglocals", dialogLocals);
     }
     if (dialogLocals.projects) {
         $scope.projects = dialogLocals.projects;
